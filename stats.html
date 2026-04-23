@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Free Fire Player Hub | Stats</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="stats">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+
+    <header class="site-header">
+      <a class="brand" href="index.html">🎮 Free Fire Player Hub</a>
+      <nav class="site-nav">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link active" href="stats.html">Stats</a>
+        <a class="nav-link" href="login.html">Login</a>
+      </nav>
+    </header>
+
+    <main class="stats-layout">
+      <section class="section-card stats-header">
+        <p class="eyebrow">Player Performance</p>
+        <h1 id="statsTitle">Mock Player Stats</h1>
+        <p class="hero-subtitle" id="statsSubtext">Showing demo data for UID lookup.</p>
+      </section>
+
+      <section class="stats-grid">
+        <article class="section-card stat-card">
+          <h3>Player Name</h3>
+          <p id="playerName" class="stat-value">—</p>
+        </article>
+        <article class="section-card stat-card">
+          <h3>K/D Ratio</h3>
+          <p id="kdRatio" class="stat-value">—</p>
+        </article>
+        <article class="section-card stat-card">
+          <h3>Win Rate</h3>
+          <p id="winRate" class="stat-value">—</p>
+        </article>
+        <article class="section-card stat-card">
+          <h3>Matches Played</h3>
+          <p id="matchesPlayed" class="stat-value">—</p>
+        </article>
+        <article class="section-card stat-card">
+          <h3>Rank</h3>
+          <p id="rank" class="stat-value">—</p>
+        </article>
+      </section>
+
+      <section class="section-card chart-card">
+        <div class="chart-head">
+          <h2>Performance Overview</h2>
+          <span class="tag">Mock Data</span>
+        </div>
+
+        <div class="bar-chart" aria-label="Visual chart of player performance">
+          <div class="bar-item">
+            <p>K/D</p>
+            <div class="bar-track"><span id="barKd"></span></div>
+          </div>
+          <div class="bar-item">
+            <p>Win %</p>
+            <div class="bar-track"><span id="barWin"></span></div>
+          </div>
+          <div class="bar-item">
+            <p>Matches</p>
+            <div class="bar-track"><span id="barMatches"></span></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
