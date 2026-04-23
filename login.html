@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Free Fire Player Hub | Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="login">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+
+    <header class="site-header">
+      <a class="brand" href="index.html">🎮 Free Fire Player Hub</a>
+      <nav class="site-nav">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="stats.html">Stats</a>
+        <a class="nav-link active" href="login.html">Login</a>
+      </nav>
+    </header>
+
+    <main class="login-wrapper">
+      <section class="section-card login-card">
+        <p class="eyebrow">Access Your Hub</p>
+        <h1>Player Login</h1>
+
+        <form id="loginForm" novalidate>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required />
+
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" minlength="6" placeholder="Enter password" required />
+
+          <button type="submit" class="btn-primary">Login</button>
+          <p id="loginMessage" class="form-error" aria-live="polite"></p>
+        </form>
+
+        <div class="auth-links">
+          <a href="#" aria-label="Create account">Create account</a>
+          <a href="#" aria-label="Forgot password">Forgot password</a>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
