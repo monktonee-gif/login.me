@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glow Beauty Store | Login</title>
+    <style>
+      :root {
+        --pink-100: #ffe9f3;
+        --pink-200: #ffd6e8;
+        --rose-300: #f4b8cc;
+        --nude-200: #f7e7dd;
+        --white: #ffffff;
+        --gold-400: #c8a868;
+        --gold-500: #b58b46;
+        --text-dark: #4b3e42;
+        --text-muted: #8f7d84;
+        --danger: #d95366;
+        --success: #2f9e6b;
+        --shadow-lg: 0 20px 45px rgba(120, 74, 95, 0.18);
+        --shadow-md: 0 10px 28px rgba(130, 95, 108, 0.12);
+        --radius-xl: 22px;
+        --radius-md: 14px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        color: var(--text-dark);
+        background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.85) 0, rgba(255, 255, 255, 0) 36%),
+          radial-gradient(circle at 80% 5%, rgba(200, 168, 104, 0.23) 0, rgba(200, 168, 104, 0) 40%),
+          linear-gradient(135deg, #fff9fc 0%, var(--pink-100) 45%, var(--nude-200) 100%);
+        display: grid;
+        place-items: center;
+        padding: 1.25rem;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* Decorative beauty-inspired blurred circles */
+      body::before,
+      body::after {
+        content: "";
+        position: absolute;
+        width: 320px;
+        height: 320px;
+        border-radius: 50%;
+        filter: blur(6px);
+        z-index: 0;
+        animation: floatBlob 8s ease-in-out infinite;
+      }
+
+      body::before {
+        background: rgba(244, 184, 204, 0.3);
+        top: -80px;
+        left: -70px;
+      }
+
+      body::after {
+        background: rgba(200, 168, 104, 0.2);
+        bottom: -90px;
+        right: -60px;
+        animation-delay: -3.5s;
+      }
+
+      .login-card {
+        position: relative;
+        z-index: 1;
+        width: min(92vw, 430px);
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        border-radius: var(--radius-xl);
+        padding: 2rem 1.75rem;
+        box-shadow: var(--shadow-lg);
+        animation: fadeUp 700ms ease;
+      }
+
+      .brand {
+        text-align: center;
+        margin-bottom: 1.6rem;
+      }
+
+      .brand h1 {
+        margin: 0;
+        font-size: clamp(1.45rem, 3.5vw, 1.85rem);
+        letter-spacing: 0.02em;
+        color: #6f4d5b;
+      }
+
+      .brand p {
+        margin: 0.4rem 0 0;
+        color: var(--text-muted);
+        font-size: 0.94rem;
+      }
+
+      .field {
+        margin-bottom: 1rem;
+      }
+
+      .field label {
+        display: block;
+        margin-bottom: 0.45rem;
+        font-size: 0.9rem;
+        color: #7a646d;
+      }
+
+      .input-wrap {
+        position: relative;
+      }
+
+      .input-wrap input {
+        width: 100%;
+        border: 1px solid #efdde6;
+        background: #fff;
+        color: var(--text-dark);
+        border-radius: var(--radius-md);
+        padding: 0.85rem 0.95rem;
+        font-size: 1rem;
+        transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+      }
+
+      .input-wrap input:focus {
+        outline: none;
+        border-color: var(--gold-400);
+        box-shadow: 0 0 0 4px rgba(200, 168, 104, 0.16);
+        transform: translateY(-1px);
+      }
+
+      .input-wrap input.invalid {
+        border-color: var(--danger);
+        box-shadow: 0 0 0 4px rgba(217, 83, 102, 0.14);
+      }
+
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: -0.1rem;
+        margin-bottom: 1rem;
+      }
+
+      .actions a,
+      .footer-link {
+        color: #8e6f7d;
+        text-decoration: none;
+        font-size: 0.88rem;
+        transition: color 180ms ease;
+      }
+
+      .actions a:hover,
+      .footer-link:hover {
+        color: var(--gold-500);
+      }
+
+      .message {
+        min-height: 1.25rem;
+        font-size: 0.9rem;
+        margin-bottom: 0.6rem;
+        opacity: 0;
+        transform: translateY(-3px);
+        transition: opacity 180ms ease, transform 180ms ease;
+      }
+
+      .message.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .message.error {
+        color: var(--danger);
+      }
+
+      .message.success {
+        color: var(--success);
+      }
+
+      .login-btn {
+        width: 100%;
+        border: none;
+        border-radius: 999px;
+        padding: 0.88rem 1rem;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 0.015em;
+        color: #fff;
+        background: linear-gradient(120deg, var(--gold-400), var(--gold-500));
+        box-shadow: var(--shadow-md);
+        cursor: pointer;
+        transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+      }
+
+      .login-btn:hover {
+        filter: brightness(1.03);
+        transform: translateY(-2px);
+      }
+
+      .login-btn:active {
+        transform: translateY(0) scale(0.99);
+      }
+
+      .login-btn.loading {
+        animation: pulseClick 450ms ease;
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 1.1rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes floatBlob {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(14px);
+        }
+      }
+
+      @keyframes pulseClick {
+        0% {
+          transform: scale(1);
+        }
+
+        35% {
+          transform: scale(0.97);
+        }
+
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .login-card {
+          padding: 1.45rem 1.1rem;
+          border-radius: 18px;
+        }
+
+        .brand p {
+          font-size: 0.88rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="login-card" aria-label="Login card">
+      <section class="brand">
+        <h1>Glow Beauty Store</h1>
+        <p>Luxury skincare & makeup essentials</p>
+      </section>
+
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="identity">Email or Username</label>
+          <div class="input-wrap">
+            <input id="identity" name="identity" type="text" autocomplete="username" placeholder="you@example.com" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <input id="password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <a href="#" aria-label="Forgot password">Forgot Password?</a>
+        </div>
+
+        <p id="message" class="message" role="status" aria-live="polite"></p>
+        <button id="loginButton" class="login-btn" type="submit">Login</button>
+      </form>
+
+      <p class="footer">
+        Don’t have an account?
+        <a class="footer-link" href="#" aria-label="Create account">Create Account</a>
+      </p>
+    </main>
+
+    <script>
+      // DOM references
+      const form = document.getElementById("loginForm");
+      const identityInput = document.getElementById("identity");
+      const passwordInput = document.getElementById("password");
+      const message = document.getElementById("message");
+      const loginButton = document.getElementById("loginButton");
+
+      /**
+       * Update status message with smooth reveal animation.
+       * @param {string} text message to show
+       * @param {"error"|"success"} type visual style
+       */
+      function showMessage(text, type) {
+        message.textContent = text;
+        message.className = `message ${type} show`;
+      }
+
+      /**
+       * Mark input as invalid when empty.
+       * @param {HTMLInputElement} input target field
+       * @returns {boolean} true if valid
+       */
+      function validateRequired(input) {
+        const valid = input.value.trim().length > 0;
+        input.classList.toggle("invalid", !valid);
+        return valid;
+      }
+
+      // Remove invalid styling as users type for better UX.
+      [identityInput, passwordInput].forEach((input) => {
+        input.addEventListener("input", () => {
+          if (input.value.trim()) {
+            input.classList.remove("invalid");
+            if (message.classList.contains("error")) {
+              message.classList.remove("show");
+            }
+          }
+        });
+      });
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        // Button click animation.
+        loginButton.classList.remove("loading");
+        void loginButton.offsetWidth;
+        loginButton.classList.add("loading");
+
+        const isIdentityValid = validateRequired(identityInput);
+        const isPasswordValid = validateRequired(passwordInput);
+
+        if (!isIdentityValid || !isPasswordValid) {
+          showMessage("Please enter both email/username and password.", "error");
+          return;
+        }
+
+        // Simulate successful login without backend.
+        showMessage("Login successful! Redirecting to your beauty dashboard...", "success");
+
+        // Example simulated delay to mimic processing.
+        loginButton.disabled = true;
+        loginButton.textContent = "Logging in...";
+
+        setTimeout(() => {
+          loginButton.disabled = false;
+          loginButton.textContent = "Login";
+        }, 1300);
+      });
+    </script>
+  </body>
+</html>
